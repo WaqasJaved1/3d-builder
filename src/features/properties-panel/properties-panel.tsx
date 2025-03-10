@@ -13,6 +13,7 @@ interface Props {
   onPositionChange: OnPositionChange;
   onRotationChange: OnRotationChange;
   onSizeChange: OnSizeChange;
+  onDelete: () => void;
 }
 export const PropertiesPanel: FC<Props> = ({
   object,
@@ -20,6 +21,7 @@ export const PropertiesPanel: FC<Props> = ({
   onPositionChange,
   onRotationChange,
   onSizeChange,
+  onDelete,
 }) => {
   if (!object) {
     return <div>No object selected</div>;
@@ -27,7 +29,7 @@ export const PropertiesPanel: FC<Props> = ({
 
   return (
     <div>
-      <PanelHeader object={object} />
+      <PanelHeader object={object} onDelete={onDelete} />
 
       <ColorPicker color={object.color} onColorChange={onColorChange} />
 

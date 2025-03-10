@@ -6,12 +6,13 @@ import { OrbitControls } from "@react-three/drei";
 
 import * as S from "./elements";
 import { CameraSetup } from "./camera-setup";
-import { v4 as uuidv4 } from "uuid";
-import { Axis, Object3D } from "../../types";
+
+import { Axis, Object3D, Object3DTypes } from "../../types";
 import { Geometry } from "./geometry";
 import { StandardMaterial } from "./standard-material";
 import { PropertiesPanel } from "../properties-panel";
 import { building, tank } from "../../models";
+import { createNewGeometry } from "../../utils";
 
 interface Props {
   model?: string;
@@ -23,70 +24,22 @@ export const WorkingArea: FC<Props> = () => {
     Math.random() > 0.5 ? building : tank
   );
 
+  const addGeometry = (type: Object3DTypes) => {
+    const geometry = createNewGeometry(type);
+    setMesh([...mesh, geometry]);
+    setSelectedItemId(geometry.id);
+  };
+
   const addSquare = () => {
-    setMesh([
-      ...mesh,
-      {
-        id: uuidv4(),
-        type: "rectangle",
-        color: "#00ff00",
-        position: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
-        rotation: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
-        size: [1, 1],
-      },
-    ]);
+    addGeometry("rectangle");
   };
 
   const addCircle = () => {
-    setMesh([
-      ...mesh,
-      {
-        id: uuidv4(),
-        type: "circle",
-        color: "red",
-        position: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
-        rotation: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
-        size: [1],
-      },
-    ]);
+    addGeometry("circle");
   };
 
   const addCylinder = () => {
-    setMesh([
-      ...mesh,
-      {
-        id: uuidv4(),
-        type: "cylinder",
-        color: "red",
-        position: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
-        rotation: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
-        size: [1, 1, 1],
-      },
-    ]);
+    addGeometry("cylinder");
   };
 
   const [selectedItemId, setSelectedItemId] = useState<string>();
@@ -162,8 +115,6 @@ export const WorkingArea: FC<Props> = () => {
       return;
     }
 
-    console.log(index, value);
-
     setMesh(
       mesh.map((_) => {
         if (_.id === selectedItemId) {
@@ -176,6 +127,15 @@ export const WorkingArea: FC<Props> = () => {
         return _;
       })
     );
+  };
+
+  const handleDelete = () => {
+    if (!selectedItemId) {
+      return;
+    }
+
+    setMesh(mesh.filter((_) => _.id !== selectedItemId));
+    setSelectedItemId("");
   };
 
   return (
@@ -216,6 +176,9 @@ export const WorkingArea: FC<Props> = () => {
                   object={object}
                   isHovered={hoveredItemId === object.id}
                   isSelected={selectedItemId === object.id}
+                  isGhost={
+                    Boolean(selectedItemId) && selectedItemId !== object.id
+                  }
                 />
               </mesh>
             ))}
@@ -253,6 +216,7 @@ export const WorkingArea: FC<Props> = () => {
             onPositionChange={handlePositionChange}
             onRotationChange={handleRotationChange}
             onSizeChange={handleSizeChange}
+            onDelete={handleDelete}
           />
         </S.PropertiesWrapper>
       </S.Layout>
