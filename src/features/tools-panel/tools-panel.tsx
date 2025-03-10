@@ -5,6 +5,7 @@ import { addObject } from "../three-d-objects";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
 import { ImportThreeDModel } from "./import-three-d-model";
+import * as S from "./elements";
 
 interface Props {
   setSelectedObjectId: (id: string) => void;
@@ -31,11 +32,11 @@ export const ToolsPanel: FC<Props> = ({ setSelectedObjectId }) => {
   };
 
   return (
-    <div>
+    <S.Container>
       <button onClick={addSquare}>Rectangle</button>
       <button onClick={addCircle}>Circle</button>
       <button onClick={addCylinder}>Cylinder</button>
       <ImportThreeDModel />
-    </div>
+    </S.Container>
   );
 };
