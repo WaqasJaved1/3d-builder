@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 const sizes = {
   rectangle: [1, 1, 1],
   circle: [1],
-  cylinder: [1, 1],
+  cylinder: [1, 1, 1],
 };
 
 export const createNewGeometry = (type: Object3DTypes): Object3D => {

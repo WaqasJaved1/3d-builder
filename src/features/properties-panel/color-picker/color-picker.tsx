@@ -40,7 +40,7 @@ export const ColorPicker: FC<Props> = ({ color, onColorChange }) => {
 
   return (
     <PanelCard title="Set Object Color">
-      <div style={{ position: "relative" }}>
+      <S.Container>
         {/* Button to toggle color picker */}
         <S.StyledButton onClick={toggleColorPicker}>
           <S.ColorBlock color={color} />
@@ -49,14 +49,14 @@ export const ColorPicker: FC<Props> = ({ color, onColorChange }) => {
 
         {/* Show color picker if showPicker is true */}
         {showPicker && (
-          <div ref={pickerRef} style={{ position: "absolute", zIndex: 2 }}>
+          <S.DropDownContainer ref={pickerRef}>
             <ChromePicker
               color={color}
               onChangeComplete={(c) => onColorChange(c.hex)}
             />
-          </div>
+          </S.DropDownContainer>
         )}
-      </div>
+      </S.Container>
     </PanelCard>
   );
 };

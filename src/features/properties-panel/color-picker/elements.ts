@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  position: relative;
+`;
+
+export const DropDownContainer = styled.div`
+  position: absolute;
+  zindex: 2;
+`;
+
 export const StyledButton = styled.button`
   display: flex;
   gap: 8px;

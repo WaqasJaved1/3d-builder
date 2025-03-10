@@ -1,1 +1,1 @@
-export * from "./three-d-viewer";
+export * from "./working-area";

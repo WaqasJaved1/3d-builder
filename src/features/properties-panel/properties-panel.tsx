@@ -1,49 +1,113 @@
 import type { FC } from "react";
 
-import { Object3D } from "../../types";
+import { Axis, Object3D } from "../../types";
 import { ColorPicker } from "./color-picker";
-import { OnPositionChange, PositionInput } from "./position-input";
+import { PositionInput } from "./position-input";
 import { PanelHeader } from "./header";
-import { OnRotationChange, RotationInput } from "./rotation-input";
-import { OnSizeChange, SizeInput } from "./size-input";
+import { RotationInput } from "./rotation-input";
+import { SizeInput } from "./size-input";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
+import {
+  changeColor,
+  changePosition,
+  changeRotation,
+  changeSize,
+  deleteObject,
+} from "../three-d-objects";
 
 interface Props {
   object?: Object3D;
-  onColorChange: (color: string) => void;
-  onPositionChange: OnPositionChange;
-  onRotationChange: OnRotationChange;
-  onSizeChange: OnSizeChange;
-  onDelete: () => void;
+  setSelectedObjectId: (id: string) => void;
 }
-export const PropertiesPanel: FC<Props> = ({
-  object,
-  onColorChange,
-  onPositionChange,
-  onRotationChange,
-  onSizeChange,
-  onDelete,
-}) => {
+export const PropertiesPanel: FC<Props> = ({ object }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleColorChange = (color: string) => {
+    if (!object?.id) {
+      return;
+    }
+
+    dispatch(
+      changeColor({
+        id: object?.id,
+        color,
+      })
+    );
+  };
+
+  const handlePositionChange = (axis: Axis, value: number) => {
+    if (!object?.id) {
+      return;
+    }
+
+    dispatch(
+      changePosition({
+        id: object?.id,
+        axis,
+        value,
+      })
+    );
+  };
+
+  const handleRotationChange = (axis: Axis, value: number) => {
+    if (!object?.id) {
+      return;
+    }
+
+    dispatch(
+      changeRotation({
+        id: object?.id,
+        axis,
+        value,
+      })
+    );
+  };
+
+  const handleSizeChange = (index: number, value: number) => {
+    if (!object?.id) {
+      return;
+    }
+
+    dispatch(
+      changeSize({
+        id: object?.id,
+        index,
+        value,
+      })
+    );
+  };
+
+  const handleDelete = () => {
+    if (!object?.id) {
+      return;
+    }
+
+    dispatch(deleteObject(object?.id));
+    setSelectedObjectId("");
+  };
+
   if (!object) {
     return <div>No object selected</div>;
   }
 
   return (
     <div>
-      <PanelHeader object={object} onDelete={onDelete} />
+      <PanelHeader object={object} onDelete={handleDelete} />
 
-      <ColorPicker color={object.color} onColorChange={onColorChange} />
+      <ColorPicker color={object.color} onColorChange={handleColorChange} />
 
       <PositionInput
         position={object.position}
-        onPositionChange={onPositionChange}
+        onPositionChange={handlePositionChange}
       />
 
       <RotationInput
         rotation={object.rotation}
-        setRotation={onRotationChange}
+        setRotation={handleRotationChange}
       />
 
-      <SizeInput object={object} onSizeChange={onSizeChange} />
+      <SizeInput object={object} onSizeChange={handleSizeChange} />
     </div>
   );
 };
