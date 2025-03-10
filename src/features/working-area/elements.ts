@@ -5,8 +5,10 @@ export const Layout = styled.div`
   flex-direction: row;
 `;
 
-export const CanvasWrapper = styled.div`
-  width: 70%;
+export const CanvasWrapper = styled.div<{ isSideBarOpen: boolean }>`
+  width: ${({ isSideBarOpen }) =>
+    isSideBarOpen ? "calc(100vw - 300px)" : "100%"};
+
   height: calc(100vh - 60px);
   border-right: 1px solid #e0e0e0;
 `;

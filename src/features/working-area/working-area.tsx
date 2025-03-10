@@ -37,7 +37,11 @@ export const WorkingArea: FC<Props> = () => {
       <ToolsPanel setSelectedObjectId={setSelectedObjectId} />
 
       <S.Layout>
-        <S.CanvasWrapper id="canvas-container" ref={canvasRef}>
+        <S.CanvasWrapper
+          id="canvas-container"
+          ref={canvasRef}
+          isSideBarOpen={Boolean(selectedObjectId)}
+        >
           <Canvas shadows>
             {threeDObjects.map((object, index) => (
               <mesh
@@ -97,12 +101,12 @@ export const WorkingArea: FC<Props> = () => {
             <gridHelper args={[100, 100]} />{" "}
           </Canvas>
         </S.CanvasWrapper>
-        <S.PropertiesWrapper>
+        {selectedObject && (
           <PropertiesPanel
             object={selectedObject}
             setSelectedObjectId={setSelectedObjectId}
           />
-        </S.PropertiesWrapper>
+        )}
       </S.Layout>
     </div>
   );

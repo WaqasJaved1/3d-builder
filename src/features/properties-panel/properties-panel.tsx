@@ -16,11 +16,13 @@ import {
   deleteObject,
 } from "../three-d-objects";
 
+import * as S from "./elements";
+
 interface Props {
-  object?: Object3D;
+  object: Object3D;
   setSelectedObjectId: (id: string) => void;
 }
-export const PropertiesPanel: FC<Props> = ({ object }) => {
+export const PropertiesPanel: FC<Props> = ({ object, setSelectedObjectId }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleColorChange = (color: string) => {
@@ -87,12 +89,12 @@ export const PropertiesPanel: FC<Props> = ({ object }) => {
     setSelectedObjectId("");
   };
 
-  if (!object) {
-    return <div>No object selected</div>;
-  }
+  const handleOnDone = () => {
+    setSelectedObjectId("");
+  };
 
   return (
-    <div>
+    <S.PropertiesWrapper>
       <PanelHeader object={object} onDelete={handleDelete} />
 
       <ColorPicker color={object.color} onColorChange={handleColorChange} />
@@ -108,6 +110,10 @@ export const PropertiesPanel: FC<Props> = ({ object }) => {
       />
 
       <SizeInput object={object} onSizeChange={handleSizeChange} />
-    </div>
+
+      <S.DoneButtonWrapper>
+        <button onClick={handleOnDone}>Done</button>
+      </S.DoneButtonWrapper>
+    </S.PropertiesWrapper>
   );
 };
