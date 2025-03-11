@@ -1,10 +1,10 @@
 import { useState, type FC } from "react";
 import * as S from "./elements";
-import { useModelsList } from "../../../hooks";
+import { useModelList } from "../../../hooks";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
-import { setObject } from "../../three-d-objects";
-import { Object3DGroup } from "../../../services";
+import { loadModel } from "../../../state";
+import { ModelWithName } from "../../../services";
 
 export const ImportThreeDModel: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -12,12 +12,12 @@ export const ImportThreeDModel: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
-  const { data } = useModelsList();
+  const { data } = useModelList();
 
-  const handleSelect = (item: Object3DGroup) => {
+  const handleSelect = (item: ModelWithName) => {
     setSelectedItem(item.name);
     setIsOpen(false); // Close dropdown after selection
-    dispatch(setObject(item.objects));
+    dispatch(loadModel(item.model));
   };
 
   return (

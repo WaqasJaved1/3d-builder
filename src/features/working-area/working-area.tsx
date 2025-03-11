@@ -23,27 +23,29 @@ interface Props {
 export const WorkingArea: FC<Props> = () => {
   const canvasRef = useRef(null);
 
-  const threeDObjects = useSelector(
-    (state: RootState) => state.threeDObjects.objects
+  const threeDModel = useSelector(
+    (state: RootState) => state.threeDModel.model
   );
 
   const [selectedObjectId, setSelectedObjectId] = useState<string>();
   const [hoveredItemId, setHoveredItemId] = useState<string>();
 
-  const selectedObject = threeDObjects.find((_) => _.id === selectedObjectId);
+  const selectedObject = threeDModel.find((_) => _.id === selectedObjectId);
+
+  const isObjectSelected = Boolean(selectedObject);
 
   return (
     <div>
       <ToolsPanel setSelectedObjectId={setSelectedObjectId} />
 
-      <S.Layout>
+      <S.Row>
         <S.CanvasWrapper
           id="canvas-container"
           ref={canvasRef}
-          isSideBarOpen={Boolean(selectedObjectId)}
+          isSideBarOpen={isObjectSelected}
         >
           <Canvas shadows>
-            {threeDObjects.map((object, index) => (
+            {threeDModel.map((object, index) => (
               <mesh
                 key={index}
                 castShadow
@@ -68,9 +70,7 @@ export const WorkingArea: FC<Props> = () => {
                   object={object}
                   isHovered={hoveredItemId === object.id}
                   isSelected={selectedObjectId === object.id}
-                  isGhost={
-                    Boolean(selectedObjectId) && selectedObjectId !== object.id
-                  }
+                  isGhost={isObjectSelected && selectedObjectId !== object.id}
                 />
               </mesh>
             ))}
@@ -107,7 +107,7 @@ export const WorkingArea: FC<Props> = () => {
             setSelectedObjectId={setSelectedObjectId}
           />
         )}
-      </S.Layout>
+      </S.Row>
     </div>
   );
 };

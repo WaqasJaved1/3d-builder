@@ -1,9 +1,9 @@
-import { Object3D } from "../types";
+import { Model3D } from "../../../types";
 
-export const tank: Object3D[] = [
+export const tank: Model3D = [
   {
     id: "tank-body",
-    type: "rectangle",
+    type: "cube",
     color: "green",
     position: {
       x: 0,

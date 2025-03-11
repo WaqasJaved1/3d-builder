@@ -1,9 +1,9 @@
-import { Object3D } from "../types";
+import { Model3D } from "../../../types";
 
-export const building: Object3D[] = [
+export const building: Model3D = [
   {
     id: "base",
-    type: "rectangle",
+    type: "cube",
     color: "gray",
     position: {
       x: 0,
@@ -19,7 +19,7 @@ export const building: Object3D[] = [
   },
   {
     id: "roof",
-    type: "rectangle",
+    type: "cube",
     color: "darkgray",
     position: {
       x: 0,
@@ -35,7 +35,7 @@ export const building: Object3D[] = [
   },
   {
     id: "window_front_left",
-    type: "rectangle",
+    type: "cube",
     color: "lightblue",
     position: {
       x: -3,
@@ -51,7 +51,7 @@ export const building: Object3D[] = [
   },
   {
     id: "window_front_right",
-    type: "rectangle",
+    type: "cube",
     color: "lightblue",
     position: {
       x: 3,

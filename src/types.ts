@@ -14,7 +14,7 @@ export type Rotation = {
 
 export type size = number[];
 
-export type Object3DTypes = "rectangle" | "circle" | "cylinder";
+export type Object3DTypes = "cube" | "sphere" | "cylinder";
 
 export type Object3D = {
   id: string;
@@ -24,3 +24,5 @@ export type Object3D = {
   rotation: Rotation;
   size: size;
 };
+
+export type Model3D = Object3D[];

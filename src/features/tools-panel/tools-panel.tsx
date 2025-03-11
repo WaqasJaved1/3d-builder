@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { createNewGeometry } from "../../utils";
 import { Object3DTypes } from "../../types";
-import { addObject } from "../three-d-objects";
+import { addObject } from "../../state";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
 import { ImportThreeDModel } from "./import-three-d-model";
@@ -20,11 +20,11 @@ export const ToolsPanel: FC<Props> = ({ setSelectedObjectId }) => {
   };
 
   const addSquare = () => {
-    addGeometry("rectangle");
+    addGeometry("cube");
   };
 
-  const addCircle = () => {
-    addGeometry("circle");
+  const addSphere = () => {
+    addGeometry("sphere");
   };
 
   const addCylinder = () => {
@@ -33,9 +33,9 @@ export const ToolsPanel: FC<Props> = ({ setSelectedObjectId }) => {
 
   return (
     <S.Container>
-      <button onClick={addSquare}>Rectangle</button>
-      <button onClick={addCircle}>Circle</button>
-      <button onClick={addCylinder}>Cylinder</button>
+      <button onClick={addSquare}>Add Cube</button>
+      <button onClick={addSphere}>Add Sphere</button>
+      <button onClick={addCylinder}>Add Cylinder</button>
       <ImportThreeDModel />
     </S.Container>
   );

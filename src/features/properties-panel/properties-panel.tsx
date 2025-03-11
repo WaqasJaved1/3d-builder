@@ -14,7 +14,7 @@ import {
   changeRotation,
   changeSize,
   deleteObject,
-} from "../three-d-objects";
+} from "../../state";
 
 import * as S from "./elements";
 

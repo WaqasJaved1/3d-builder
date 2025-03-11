@@ -1,5 +1,5 @@
 export const GeometryArgs = {
-  circle: [
+  sphere: [
     {
       id: "radius",
       label: "Radius",
@@ -8,7 +8,7 @@ export const GeometryArgs = {
       max: 100,
     },
   ],
-  rectangle: [
+  cube: [
     {
       id: "width",
       label: "Width",

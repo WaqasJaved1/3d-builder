@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Layout = styled.div`
+export const Row = styled.div`
   display: flex;
   flex-direction: row;
 `;

@@ -15,7 +15,7 @@ export const PositionInput: FC<Props> = ({ position, onPositionChange }) => {
   };
 
   return (
-    <PanelCard title="Set position">
+    <PanelCard title="Set object position">
       {/* Input fields for x, y, z position */}
       <div>
         <label>X Position: </label>

@@ -27,7 +27,7 @@ export const SizeInput: FC<Props> = ({ object, onSizeChange }) => {
   return (
     <PanelCard title="Size">
       {geometryArgs.map((arg, index) => (
-        <div>
+        <div key={arg.id}>
           <label>{arg.label}: </label>
           <input
             type="number"

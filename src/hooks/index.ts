@@ -1,1 +1,1 @@
-export * from "./use-models-list";
+export * from "./use-model-list";

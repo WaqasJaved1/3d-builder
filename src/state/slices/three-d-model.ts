@@ -1,34 +1,34 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Axis, Object3D } from "../../types";
+import { Axis, Model3D, Object3D } from "../../types";
 
 // Define initial state
-interface ThreeDObjectsState {
-  objects: Object3D[];
+interface ThreeDModelState {
+  model: Model3D;
 }
 
-const initialState: ThreeDObjectsState = {
-  objects: [],
+const initialState: ThreeDModelState = {
+  model: [],
 };
 
-const threeDObjectsSlice = createSlice({
+const threeDModelSlice = createSlice({
   name: "meshes",
   initialState,
   reducers: {
-    addObject: (state, action: PayloadAction<Object3D>) => {
-      state.objects.push(action.payload);
+    loadModel: (state, action: PayloadAction<Model3D>) => {
+      state.model = action.payload;
     },
-    setObject: (state, action: PayloadAction<Object3D[]>) => {
-      state.objects = action.payload;
+    addObject: (state, action: PayloadAction<Object3D>) => {
+      state.model.push(action.payload);
     },
     deleteObject: (state, action: PayloadAction<string>) => {
-      state.objects = state.objects.filter((_) => _.id !== action.payload);
+      state.model = state.model.filter((_) => _.id !== action.payload);
     },
     changeColor: (
       state,
       action: PayloadAction<{ id: string; color: string }>
     ) => {
       const { id, color } = action.payload;
-      const object = state.objects.find((_) => _.id === id);
+      const object = state.model.find((_) => _.id === id);
       if (object) {
         object.color = color;
       }
@@ -38,7 +38,7 @@ const threeDObjectsSlice = createSlice({
       action: PayloadAction<{ id: string; axis: Axis; value: number }>
     ) => {
       const { id, axis, value } = action.payload;
-      const object = state.objects.find((_) => _.id === id);
+      const object = state.model.find((_) => _.id === id);
       if (object) {
         object.position[axis] = value;
       }
@@ -48,7 +48,7 @@ const threeDObjectsSlice = createSlice({
       action: PayloadAction<{ id: string; axis: Axis; value: number }>
     ) => {
       const { id, axis, value } = action.payload;
-      const object = state.objects.find((_) => _.id === id);
+      const object = state.model.find((_) => _.id === id);
       if (object) {
         object.rotation[axis] = value;
       }
@@ -58,7 +58,7 @@ const threeDObjectsSlice = createSlice({
       action: PayloadAction<{ id: string; index: number; value: number }>
     ) => {
       const { id, index, value } = action.payload;
-      const object = state.objects.find((_) => _.id === id);
+      const object = state.model.find((_) => _.id === id);
       if (object) {
         object.size[index] = value;
       }
@@ -73,6 +73,6 @@ export const {
   changePosition,
   changeRotation,
   changeSize,
-  setObject,
-} = threeDObjectsSlice.actions;
-export default threeDObjectsSlice.reducer;
+  loadModel,
+} = threeDModelSlice.actions;
+export default threeDModelSlice.reducer;

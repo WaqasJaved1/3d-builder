@@ -4,7 +4,7 @@ import {
   PropsWithChildren,
   useContext,
 } from "react";
-import { ThreeDModelService } from "../services";
+import { ThreeDModelService } from "../../services";
 
 type ModelContextType = {
   threeDModelService: ThreeDModelService;

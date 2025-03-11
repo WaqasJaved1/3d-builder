@@ -2,8 +2,8 @@ import { Object3D, Object3DTypes } from "../types";
 import { v4 as uuidv4 } from "uuid";
 
 const sizes = {
-  rectangle: [1, 1, 1],
-  circle: [1],
+  cube: [1, 1, 1],
+  sphere: [1],
   cylinder: [1, 1, 1],
 };
 

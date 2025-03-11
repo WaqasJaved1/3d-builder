@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import threeDObjectsSlice from "./features/three-d-objects/three-d-objects-slice";
+import threeDModelSlice from "./state/slices/three-d-model";
 
 export const store = configureStore({
   reducer: {
-    threeDObjects: threeDObjectsSlice,
+    threeDModel: threeDModelSlice,
   },
 });
 

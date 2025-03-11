@@ -6,13 +6,13 @@ interface Props {
 }
 
 export const Geometry: FC<Props> = ({ object }) => {
-  if (object.type === "rectangle") {
+  if (object.type === "cube") {
     return (
       <boxGeometry args={[object.size[0], object.size[1], object.size[2]]} />
     );
   }
 
-  if (object.type === "circle") {
+  if (object.type === "sphere") {
     return <sphereGeometry args={[object.size[0], 32, 32]} />;
   }
 
