@@ -28,7 +28,9 @@ Once dependencies are installed, you can start the project by running:
 
 `npm run dev`
 
-This will start a local development server and open the project in your browser, where you can view and interact with the 3D models.
+This will start a local development server and open the project in your browser, where you can create view and interact with the 3D models.
+
+![Product Image](https://github.com/WaqasJaved1/3d-builder/blob/5b36bb24b911f810b3dd62ed56e907059780429c/src/assets/product-image.png)
 
 ## Technologies Used
 
